@@ -1,0 +1,17 @@
+package domain
+
+type Task struct {
+	Id    int    `json:"id"`
+	Title string `json:"title"`
+	Done  bool   `json:"done"`
+}
+
+type UserRepository interface {
+	Save(Task)
+	GetById(id int) (Task, error)
+}
+
+type UserUsecase interface {
+	Save(Task) error
+	GetTaskById(id int) (Task, error)
+}
