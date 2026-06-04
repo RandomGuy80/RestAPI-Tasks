@@ -9,9 +9,13 @@ type Task struct {
 type UserRepository interface {
 	Save(Task)
 	GetById(id int) (Task, error)
+	DeleteById(id int) error
+	UpdateById(id int, task Task) error
 }
 
 type UserUsecase interface {
 	Save(Task) error
 	GetTaskById(id int) (Task, error)
+	DeleteById(id int) error
+	UpdateById(id int, task Task) error
 }

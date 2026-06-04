@@ -45,3 +45,43 @@ func (h *Handler) GetTaskById(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(task)
 }
+
+func (h *Handler) DeleteTaskById(w http.ResponseWriter, r *http.Request) {
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "invalid id", http.StatusBadRequest)
+		return
+	}
+
+	err = h.usecase.DeleteById(id)
+	if err != nil {
+		http.Error(w, "task don't exists", http.StatusNotFound)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) UpdateById(w http.ResponseWriter, r *http.Request) {
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "invalid id", http.StatusBadRequest)
+		return
+	}
+
+	var newTask domain.Task
+	err = json.NewDecoder(r.Body).Decode(&newTask)
+	if err != nil {
+		http.Error(w, "invalid json", http.StatusBadRequest)
+		return
+	}
+
+	err = h.usecase.UpdateById(id, newTask)
+	if err != nil {
+		http.Error(w, "Invalid request", http.StatusNotFound)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(newTask)
+}

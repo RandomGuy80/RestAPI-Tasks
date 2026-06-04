@@ -20,3 +20,11 @@ func (r *UserRepository) Save(task domain.Task) {
 func (r *UserRepository) GetById(id int) (task domain.Task, err error) {
 	return r.db.GetById(id)
 }
+
+func (r *UserRepository) DeleteById(id int) error {
+	return r.db.DeleteById(id)
+}
+
+func (r *UserRepository) UpdateById(id int, task domain.Task) error {
+	return r.db.UpdateById(id, task)
+}

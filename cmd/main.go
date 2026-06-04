@@ -18,6 +18,8 @@ func main() {
 	r := http.NewServeMux()
 	r.HandleFunc("POST /tasks", userHandler.SaveTask)
 	r.HandleFunc("GET /tasks/{id}", userHandler.GetTaskById)
+	r.HandleFunc("DELETE /tasks/{id}", userHandler.DeleteTaskById)
+	r.HandleFunc("PUT /tasks/{id}", userHandler.UpdateById)
 
 	http.ListenAndServe(":8080", r)
 }

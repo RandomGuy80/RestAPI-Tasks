@@ -27,3 +27,11 @@ func (u *UserUsecase) Save(task domain.Task) error {
 func (u *UserUsecase) GetTaskById(id int) (domain.Task, error) {
 	return u.repo.GetById(id)
 }
+
+func (u *UserUsecase) DeleteById(id int) error {
+	return u.repo.DeleteById(id)
+}
+
+func (u *UserUsecase) UpdateById(id int, task domain.Task) error {
+	return u.repo.UpdateById(id, task)
+}
