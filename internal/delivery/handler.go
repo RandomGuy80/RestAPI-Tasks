@@ -42,6 +42,7 @@ func (h *Handler) GetTaskById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(task)
 }
@@ -82,6 +83,8 @@ func (h *Handler) UpdateById(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request", http.StatusNotFound)
 		return
 	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(newTask)
 }

@@ -5,11 +5,15 @@ import (
 	"RestAPITasks/internal/repository"
 	"RestAPITasks/internal/storage"
 	"RestAPITasks/internal/usecase"
+	"log"
 	"net/http"
 )
 
 func main() {
-	db := storage.NewStorage()
+	db, err := storage.NewStorage("postgres://postgres:password@localhost:5432/tasks_db?sslmode=disable")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	userRepo := repository.NewUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepo)

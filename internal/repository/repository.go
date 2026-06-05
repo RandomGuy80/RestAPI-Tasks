@@ -13,8 +13,8 @@ func NewUserRepository(db *storage.Storage) *UserRepository {
 	return &UserRepository{db: db}
 }
 
-func (r *UserRepository) Save(task domain.Task) {
-	r.db.Save(task)
+func (r *UserRepository) Save(task domain.Task) error {
+	return r.db.Save(task)
 }
 
 func (r *UserRepository) GetById(id int) (task domain.Task, err error) {

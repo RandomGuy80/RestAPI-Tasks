@@ -7,7 +7,7 @@ type Task struct {
 }
 
 type UserRepository interface {
-	Save(Task)
+	Save(Task) error
 	GetById(id int) (Task, error)
 	DeleteById(id int) error
 	UpdateById(id int, task Task) error
